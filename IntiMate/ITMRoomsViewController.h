@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ITMViewController : UIViewController
+@interface ITMRoomsViewController : UIViewController {
+    
+    __weak IBOutlet UITableView *_tableView;
+}
 
 @end

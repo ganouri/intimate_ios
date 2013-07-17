@@ -8,7 +8,7 @@
 
 #import "ITMAppDelegate.h"
 
-#import "ITMViewController.h"
+#import "ITMRoomsViewController.h"
 
 @implementation ITMAppDelegate
 
@@ -16,8 +16,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ITMViewController alloc] initWithNibName:@"ITMViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    self.viewController = [[ITMRoomsViewController alloc] initWithNibName:@"ITMRoomsViewController" bundle:nil];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
     return YES;
 }

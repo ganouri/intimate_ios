@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ITMViewController;
+@class ITMRoomsViewController;
 
 @interface ITMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) ITMViewController *viewController;
+@property (strong, nonatomic) ITMRoomsViewController *viewController;
 
 @end
