@@ -28,6 +28,9 @@
 		AD7792A7179A5E25006F6AE1 /* profile_picture_generic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */; };
 		AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */; };
 		AD7792AB179ADE25006F6AE1 /* profile_picture_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A9179ADE25006F6AE1 /* profile_picture_mask@2x.png */; };
+		AD7792B5179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7792B0179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m */; };
+		AD7792B6179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7792B2179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m */; };
+		AD7792B7179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7792B4179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m */; };
 		AD9969171796B7A400679215 /* ITMRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9969151796B7A400679215 /* ITMRoomViewController.m */; };
 		AD9969181796B7A400679215 /* ITMRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9969161796B7A400679215 /* ITMRoomViewController.xib */; };
 /* End PBXBuildFile section */
@@ -71,6 +74,13 @@
 		AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_picture_generic@2x.png"; sourceTree = "<group>"; };
 		AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_picture_mask.png; sourceTree = "<group>"; };
 		AD7792A9179ADE25006F6AE1 /* profile_picture_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_picture_mask@2x.png"; sourceTree = "<group>"; };
+		AD7792AE179AE0DF006F6AE1 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
+		AD7792AF179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		AD7792B0179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		AD7792B1179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		AD7792B2179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		AD7792B3179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		AD7792B4179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		AD9969141796B7A400679215 /* ITMRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMRoomViewController.h; sourceTree = "<group>"; };
 		AD9969151796B7A400679215 /* ITMRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMRoomViewController.m; sourceTree = "<group>"; };
 		AD9969161796B7A400679215 /* ITMRoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITMRoomViewController.xib; sourceTree = "<group>"; };
@@ -136,6 +146,7 @@
 		AD2150951796AA92003CDB1C /* IntiMate */ = {
 			isa = PBXGroup;
 			children = (
+				AD7792AC179AE0DF006F6AE1 /* Libs */,
 				AD7792A3179A5E24006F6AE1 /* Resources */,
 				AD2150961796AA92003CDB1C /* Supporting Files */,
 				AD21509E1796AA92003CDB1C /* ITMAppDelegate.h */,
@@ -193,6 +204,28 @@
 			);
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
+		};
+		AD7792AC179AE0DF006F6AE1 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				AD7792AD179AE0DF006F6AE1 /* MKAdditions */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		AD7792AD179AE0DF006F6AE1 /* MKAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				AD7792AE179AE0DF006F6AE1 /* MKBlockAdditions.h */,
+				AD7792AF179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.h */,
+				AD7792B0179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m */,
+				AD7792B1179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.h */,
+				AD7792B2179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m */,
+				AD7792B3179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.h */,
+				AD7792B4179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m */,
+			);
+			path = MKAdditions;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -344,6 +377,9 @@
 				AD2150A01796AA92003CDB1C /* ITMAppDelegate.m in Sources */,
 				AD2150A91796AA92003CDB1C /* ITMRoomsViewController.m in Sources */,
 				AD9969171796B7A400679215 /* ITMRoomViewController.m in Sources */,
+				AD7792B5179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m in Sources */,
+				AD7792B6179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				AD7792B7179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
