@@ -24,6 +24,10 @@
 		AD2150B61796AA93003CDB1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2150911796AA92003CDB1C /* Foundation.framework */; };
 		AD2150BE1796AA93003CDB1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2150BC1796AA93003CDB1C /* InfoPlist.strings */; };
 		AD2150C11796AA93003CDB1C /* IntiMateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2150C01796AA93003CDB1C /* IntiMateTests.m */; };
+		AD7792A6179A5E25006F6AE1 /* profile_picture_generic.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A4179A5E25006F6AE1 /* profile_picture_generic.png */; };
+		AD7792A7179A5E25006F6AE1 /* profile_picture_generic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */; };
+		AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */; };
+		AD7792AB179ADE25006F6AE1 /* profile_picture_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A9179ADE25006F6AE1 /* profile_picture_mask@2x.png */; };
 		AD9969171796B7A400679215 /* ITMRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9969151796B7A400679215 /* ITMRoomViewController.m */; };
 		AD9969181796B7A400679215 /* ITMRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9969161796B7A400679215 /* ITMRoomViewController.xib */; };
 /* End PBXBuildFile section */
@@ -63,6 +67,10 @@
 		AD2150BD1796AA93003CDB1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2150BF1796AA93003CDB1C /* IntiMateTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntiMateTests.h; sourceTree = "<group>"; };
 		AD2150C01796AA93003CDB1C /* IntiMateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntiMateTests.m; sourceTree = "<group>"; };
+		AD7792A4179A5E25006F6AE1 /* profile_picture_generic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_picture_generic.png; sourceTree = "<group>"; };
+		AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_picture_generic@2x.png"; sourceTree = "<group>"; };
+		AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_picture_mask.png; sourceTree = "<group>"; };
+		AD7792A9179ADE25006F6AE1 /* profile_picture_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_picture_mask@2x.png"; sourceTree = "<group>"; };
 		AD9969141796B7A400679215 /* ITMRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMRoomViewController.h; sourceTree = "<group>"; };
 		AD9969151796B7A400679215 /* ITMRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMRoomViewController.m; sourceTree = "<group>"; };
 		AD9969161796B7A400679215 /* ITMRoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITMRoomViewController.xib; sourceTree = "<group>"; };
@@ -128,6 +136,7 @@
 		AD2150951796AA92003CDB1C /* IntiMate */ = {
 			isa = PBXGroup;
 			children = (
+				AD7792A3179A5E24006F6AE1 /* Resources */,
 				AD2150961796AA92003CDB1C /* Supporting Files */,
 				AD21509E1796AA92003CDB1C /* ITMAppDelegate.h */,
 				AD21509F1796AA92003CDB1C /* ITMAppDelegate.m */,
@@ -173,6 +182,17 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		AD7792A3179A5E24006F6AE1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */,
+				AD7792A9179ADE25006F6AE1 /* profile_picture_mask@2x.png */,
+				AD7792A4179A5E25006F6AE1 /* profile_picture_generic.png */,
+				AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */,
+			);
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -254,6 +274,10 @@
 				AD2150A61796AA92003CDB1C /* Default-568h@2x.png in Resources */,
 				AD2150AC1796AA92003CDB1C /* ITMRoomsViewController.xib in Resources */,
 				AD9969181796B7A400679215 /* ITMRoomViewController.xib in Resources */,
+				AD7792A6179A5E25006F6AE1 /* profile_picture_generic.png in Resources */,
+				AD7792A7179A5E25006F6AE1 /* profile_picture_generic@2x.png in Resources */,
+				AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */,
+				AD7792AB179ADE25006F6AE1 /* profile_picture_mask@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +456,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntiMate/IntiMate-Prefix.pch";
 				INFOPLIST_FILE = "IntiMate/IntiMate-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -444,6 +469,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntiMate/IntiMate-Prefix.pch";
 				INFOPLIST_FILE = "IntiMate/IntiMate-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

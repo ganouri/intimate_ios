@@ -12,3 +12,9 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking 3
 #define COCOAPODS_VERSION_PATCH_AFNetworking 1
 
+// UIBubbleTableView
+#define COCOAPODS_POD_AVAILABLE_UIBubbleTableView
+#define COCOAPODS_VERSION_MAJOR_UIBubbleTableView 0
+#define COCOAPODS_VERSION_MINOR_UIBubbleTableView 2
+#define COCOAPODS_VERSION_PATCH_UIBubbleTableView 0
+

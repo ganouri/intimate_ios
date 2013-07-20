@@ -7,8 +7,12 @@
 //
 
 #import "ITMRoomViewController.h"
+#import "UIBubbleTableView.h"
 
-@interface ITMRoomViewController ()
+@interface ITMRoomViewController () <UIBubbleTableViewDataSource> {
+    UIBubbleTableView *_bubbleView;
+    NSMutableArray *_dataSource;
+}
 
 @end
 
@@ -19,6 +23,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        _dataSource = [@[@"Hello", @"Test", @"Hi", @"Good day", @"Love"] mutableCopy];
+        
     }
     return self;
 }
@@ -27,6 +34,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _bubbleView = [[UIBubbleTableView alloc] initWithFrame:self.view.bounds];
+    _bubbleView.bubbleDataSource = self;
+    _bubbleView.showAvatars = YES;
+    [self.view addSubview:_bubbleView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +46,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - UIBubbleTableView Datasource
+
+- (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView {
+    return _dataSource.count;
+}
+
+- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row {
+    NSBubbleType type = row%2 == 0 ? BubbleTypeMine : BubbleTypeSomeoneElse;
+    NSBubbleData *heyBubble = nil;
+    // text only
+    heyBubble = [NSBubbleData dataWithText:_dataSource[row]
+                                      date:[NSDate date]
+                                      type:type];
+    if (type == BubbleTypeSomeoneElse) {
+        heyBubble.avatar = [UIImage imageNamed:@"profile_picture_generic"];
+    } else {
+        heyBubble.avatar = nil;
+    }
+
+
+    return heyBubble;
+}
+
 
 @end
