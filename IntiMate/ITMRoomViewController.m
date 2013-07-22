@@ -46,12 +46,6 @@
     [self.view addSubview:_bubbleView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UIBubbleTableView Datasource
 
 - (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView {

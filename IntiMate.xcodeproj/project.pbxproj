@@ -33,6 +33,10 @@
 		AD7792B7179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7792B4179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m */; };
 		AD9969171796B7A400679215 /* ITMRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9969151796B7A400679215 /* ITMRoomViewController.m */; };
 		AD9969181796B7A400679215 /* ITMRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9969161796B7A400679215 /* ITMRoomViewController.xib */; };
+		ADD57C3C179D48EA005E2DA3 /* ITMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C3A179D48EA005E2DA3 /* ITMLoginViewController.m */; };
+		ADD57C3D179D48EA005E2DA3 /* ITMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADD57C3B179D48EA005E2DA3 /* ITMLoginViewController.xib */; };
+		ADD57C40179D4AF1005E2DA3 /* ITMAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C3F179D4AF1005E2DA3 /* ITMAuthManager.m */; };
+		ADD57C46179D4BFA005E2DA3 /* ITMMainNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C45179D4BFA005E2DA3 /* ITMMainNavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +88,13 @@
 		AD9969141796B7A400679215 /* ITMRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMRoomViewController.h; sourceTree = "<group>"; };
 		AD9969151796B7A400679215 /* ITMRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMRoomViewController.m; sourceTree = "<group>"; };
 		AD9969161796B7A400679215 /* ITMRoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITMRoomViewController.xib; sourceTree = "<group>"; };
+		ADD57C39179D48EA005E2DA3 /* ITMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMLoginViewController.h; sourceTree = "<group>"; };
+		ADD57C3A179D48EA005E2DA3 /* ITMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMLoginViewController.m; sourceTree = "<group>"; };
+		ADD57C3B179D48EA005E2DA3 /* ITMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITMLoginViewController.xib; sourceTree = "<group>"; };
+		ADD57C3E179D4AF1005E2DA3 /* ITMAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMAuthManager.h; sourceTree = "<group>"; };
+		ADD57C3F179D4AF1005E2DA3 /* ITMAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMAuthManager.m; sourceTree = "<group>"; };
+		ADD57C44179D4BFA005E2DA3 /* ITMMainNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMMainNavigationViewController.h; sourceTree = "<group>"; };
+		ADD57C45179D4BFA005E2DA3 /* ITMMainNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMMainNavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				AD2150951796AA92003CDB1C /* IntiMate */,
+				AD7792AC179AE0DF006F6AE1 /* Libs */,
+				AD7792A3179A5E24006F6AE1 /* Resources */,
+				AD2150961796AA92003CDB1C /* Supporting Files */,
 				AD2150B91796AA93003CDB1C /* IntiMateTests */,
 				AD21508E1796AA92003CDB1C /* Frameworks */,
 				AD21508D1796AA92003CDB1C /* Products */,
@@ -146,17 +160,9 @@
 		AD2150951796AA92003CDB1C /* IntiMate */ = {
 			isa = PBXGroup;
 			children = (
-				AD7792AC179AE0DF006F6AE1 /* Libs */,
-				AD7792A3179A5E24006F6AE1 /* Resources */,
-				AD2150961796AA92003CDB1C /* Supporting Files */,
-				AD21509E1796AA92003CDB1C /* ITMAppDelegate.h */,
-				AD21509F1796AA92003CDB1C /* ITMAppDelegate.m */,
-				AD2150A71796AA92003CDB1C /* ITMRoomsViewController.h */,
-				AD2150A81796AA92003CDB1C /* ITMRoomsViewController.m */,
-				AD2150AA1796AA92003CDB1C /* ITMRoomsViewController.xib */,
-				AD9969141796B7A400679215 /* ITMRoomViewController.h */,
-				AD9969151796B7A400679215 /* ITMRoomViewController.m */,
-				AD9969161796B7A400679215 /* ITMRoomViewController.xib */,
+				ADD57C43179D4B39005E2DA3 /* Model */,
+				ADD57C42179D4B26005E2DA3 /* View */,
+				ADD57C41179D4B0F005E2DA3 /* Controller */,
 			);
 			path = IntiMate;
 			sourceTree = "<group>";
@@ -173,6 +179,7 @@
 				AD2150A51796AA92003CDB1C /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = IntiMate;
 			sourceTree = "<group>";
 		};
 		AD2150B91796AA93003CDB1C /* IntiMateTests */ = {
@@ -210,7 +217,8 @@
 			children = (
 				AD7792AD179AE0DF006F6AE1 /* MKAdditions */,
 			);
-			path = Libs;
+			name = Libs;
+			path = IntiMate/Libs;
 			sourceTree = "<group>";
 		};
 		AD7792AD179AE0DF006F6AE1 /* MKAdditions */ = {
@@ -225,6 +233,42 @@
 				AD7792B4179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m */,
 			);
 			path = MKAdditions;
+			sourceTree = "<group>";
+		};
+		ADD57C41179D4B0F005E2DA3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AD21509E1796AA92003CDB1C /* ITMAppDelegate.h */,
+				AD21509F1796AA92003CDB1C /* ITMAppDelegate.m */,
+				ADD57C3E179D4AF1005E2DA3 /* ITMAuthManager.h */,
+				ADD57C3F179D4AF1005E2DA3 /* ITMAuthManager.m */,
+				ADD57C44179D4BFA005E2DA3 /* ITMMainNavigationViewController.h */,
+				ADD57C45179D4BFA005E2DA3 /* ITMMainNavigationViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		ADD57C42179D4B26005E2DA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AD2150A71796AA92003CDB1C /* ITMRoomsViewController.h */,
+				AD2150A81796AA92003CDB1C /* ITMRoomsViewController.m */,
+				AD2150AA1796AA92003CDB1C /* ITMRoomsViewController.xib */,
+				ADD57C39179D48EA005E2DA3 /* ITMLoginViewController.h */,
+				ADD57C3A179D48EA005E2DA3 /* ITMLoginViewController.m */,
+				ADD57C3B179D48EA005E2DA3 /* ITMLoginViewController.xib */,
+				AD9969141796B7A400679215 /* ITMRoomViewController.h */,
+				AD9969151796B7A400679215 /* ITMRoomViewController.m */,
+				AD9969161796B7A400679215 /* ITMRoomViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		ADD57C43179D4B39005E2DA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +355,7 @@
 				AD7792A7179A5E25006F6AE1 /* profile_picture_generic@2x.png in Resources */,
 				AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */,
 				AD7792AB179ADE25006F6AE1 /* profile_picture_mask@2x.png in Resources */,
+				ADD57C3D179D48EA005E2DA3 /* ITMLoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +425,9 @@
 				AD7792B5179AE0DF006F6AE1 /* NSObject+MKBlockAdditions.m in Sources */,
 				AD7792B6179AE0DF006F6AE1 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				AD7792B7179AE0DF006F6AE1 /* UIAlertView+MKBlockAdditions.m in Sources */,
+				ADD57C3C179D48EA005E2DA3 /* ITMLoginViewController.m in Sources */,
+				ADD57C40179D4AF1005E2DA3 /* ITMAuthManager.m in Sources */,
+				ADD57C46179D4BFA005E2DA3 /* ITMMainNavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "ITMRoomsViewController.h"
 #import "ITMRoomViewController.h"
+#import "UIActionSheet+MKBlockAdditions.h"
 
 #define ROOM_KEY @"ROOM_KEY"
 
@@ -22,6 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                           target:self
+                                                                                           action:@selector(addButtonClicked)];
+    
     self.title = @"My Rooms";
     
     _dataSource = [NSMutableArray array];
@@ -30,6 +35,19 @@
         [_dataSource addObject:[NSString stringWithFormat:@"Room %d", i]];
     }
     
+}
+
+#pragma mark - User Events
+
+- (void)addButtonClicked {
+    [UIActionSheet photoPickerWithTitle:@"Attach File"
+                             showInView:self.view
+                              presentVC:self
+                          onPhotoPicked:^(UIImage *chosenImage) {
+                              
+                              // TODO: open address book
+
+                          } onCancel:^{}];
 }
 
 #pragma mark - UITableView DataSource

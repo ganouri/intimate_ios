@@ -9,15 +9,19 @@
 #import "ITMAppDelegate.h"
 
 #import "ITMRoomsViewController.h"
+#import "ITMMainNavigationViewController.h"
+#import "ITMAuthManager.h"
 
 @implementation ITMAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ITMRoomsViewController alloc] initWithNibName:@"ITMRoomsViewController" bundle:nil];
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    ITMRoomsViewController *roomsViewController = [[ITMRoomsViewController alloc] initWithNibName:@"ITMRoomsViewController" bundle:nil];
+    ITMMainNavigationViewController *nc = [[ITMMainNavigationViewController alloc] initWithRootViewController:roomsViewController];
+    
+    [ITMAuthManager shared].mainNavigationController = nc;
+    
     self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
     return YES;
