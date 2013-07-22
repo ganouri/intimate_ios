@@ -127,9 +127,8 @@ static UIViewController *_presentVC;
     if(!editedImage)
         editedImage = (UIImage*) [info valueForKey:UIImagePickerControllerOriginalImage];
     
-    _photoPickedBlock(editedImage);
 	[picker dismissViewControllerAnimated:YES completion:^{
-        
+        _photoPickedBlock(editedImage);
     }];
 }
 
@@ -138,9 +137,8 @@ static UIViewController *_presentVC;
 {
     // Dismiss the image selection and close the program
     [_presentVC dismissViewControllerAnimated:YES completion:^{
-        
+        _cancelBlock();
     }];
-    _cancelBlock();
 }
 
 +(void)actionSheet:(UIActionSheet*) actionSheet didDismissWithButtonIndex:(NSInteger) buttonIndex

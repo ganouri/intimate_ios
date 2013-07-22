@@ -13,5 +13,8 @@
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 
 + (ITMAuthManager *)shared;
+- (void)presentLoginViewControllerPasswordOnly:(BOOL)passOnly
+                                      animated:(BOOL)animated
+                                    completion:(void (^)())completion;
 
 @end

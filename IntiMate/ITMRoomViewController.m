@@ -9,6 +9,7 @@
 #import "ITMRoomViewController.h"
 #import "UIBubbleTableView.h"
 #import "UIActionSheet+MKBlockAdditions.h"
+#import "ITMAuthManager.h"
 
 @interface ITMRoomViewController () <UIBubbleTableViewDataSource> {
     UIBubbleTableView *_bubbleView;
@@ -85,9 +86,13 @@
                               presentVC:self
                           onPhotoPicked:^(UIImage *chosenImage) {
                               
-//                              NSData *data = UIImageJPEGRepresentation(chosenImage, 0.2);
-                              [_dataSource addObject:chosenImage];
-                              [_bubbleView reloadData];
+                              [[ITMAuthManager shared] presentLoginViewControllerPasswordOnly:YES
+                                                                                     animated:YES
+                                                                                   completion:^{
+                                  [_dataSource addObject:chosenImage];
+                                  [_bubbleView reloadData];
+                              }];
+                              
                           } onCancel:^{
                               
                           }];

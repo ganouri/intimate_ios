@@ -12,11 +12,19 @@
     
     __weak IBOutlet UITextField *_emailTextField;
     __weak IBOutlet UITextField *_passwordTextField;
+    __weak IBOutlet UIButton *_loginButton;
     
+    __weak IBOutlet UIButton *_createAccountButton;
+    __weak IBOutlet UIButton *_unlockButton;
+    __weak IBOutlet UILabel *_termsLabel;
+    __weak IBOutlet UIButton *_termsButton;
 }
+
+@property (nonatomic) BOOL isPasswordOnly;
 
 - (IBAction)loginClicked:(id)sender;
 - (IBAction)createClicked:(id)sender;
+- (IBAction)unlockClicked:(id)sender;
 
 
 @end

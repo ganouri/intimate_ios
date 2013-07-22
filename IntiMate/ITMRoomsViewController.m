@@ -9,6 +9,7 @@
 #import "ITMRoomsViewController.h"
 #import "ITMRoomViewController.h"
 #import "UIActionSheet+MKBlockAdditions.h"
+#import "ITMRoomCell.h"
 
 #define ROOM_KEY @"ROOM_KEY"
 
@@ -22,8 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [_tableView registerNib:[UINib nibWithNibName:@"ITMRoomCell" bundle:nil]
+     forCellReuseIdentifier:@"ITMRoomCell"];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
                                                                                            target:self
                                                                                            action:@selector(addButtonClicked)];
     
@@ -31,7 +35,7 @@
     
     _dataSource = [NSMutableArray array];
     
-    for (int i = 0; i < 5; i ++) {
+    for (int i = 0; i < 8; i ++) {
         [_dataSource addObject:[NSString stringWithFormat:@"Room %d", i]];
     }
     
@@ -57,13 +61,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ident = @"CellIdent";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ident];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ident];
-    }
+    static NSString *ident = @"ITMRoomCell";
+    ITMRoomCell *cell = [tableView dequeueReusableCellWithIdentifier:ident];
+
+    cell.titleLabel.text = _dataSource[indexPath.row];
+    cell.subtitleLabel.text = @"Me, Kate Ruby";
     
-    cell.textLabel.text = _dataSource[indexPath.row];
     return cell;
 }
 

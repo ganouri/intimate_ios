@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationBar setBarStyle:UIBarStyleBlackOpaque];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

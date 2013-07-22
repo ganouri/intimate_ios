@@ -34,13 +34,21 @@
 #pragma mark - 
 
 - (void)applicationDidBecomeActiveNotification {
-    NSLog(@"ded");
-    [self presentLoginViewController];
+    [self presentLoginViewControllerPasswordOnly:NO
+                                        animated:NO
+                                      completion:^{}];
 }
 
-- (void)presentLoginViewController {
-    ITMLoginViewController *loginViewController = [[ITMLoginViewController alloc] init];
-    [self.mainNavigationController presentViewController:loginViewController animated:YES completion:^{}];
+- (void)presentLoginViewControllerPasswordOnly:(BOOL)passOnly
+                                      animated:(BOOL)animated
+                                    completion:(void (^)())completion {
+    ITMLoginViewController *loginViewController = [ITMLoginViewController new];
+    loginViewController.isPasswordOnly = passOnly;
+    [self.mainNavigationController presentViewController:loginViewController
+                                                animated:YES
+                                              completion:^{
+                                                  completion();
+                                              }];
 }
 
 

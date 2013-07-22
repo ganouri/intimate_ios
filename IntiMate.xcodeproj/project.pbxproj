@@ -37,6 +37,8 @@
 		ADD57C3D179D48EA005E2DA3 /* ITMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADD57C3B179D48EA005E2DA3 /* ITMLoginViewController.xib */; };
 		ADD57C40179D4AF1005E2DA3 /* ITMAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C3F179D4AF1005E2DA3 /* ITMAuthManager.m */; };
 		ADD57C46179D4BFA005E2DA3 /* ITMMainNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C45179D4BFA005E2DA3 /* ITMMainNavigationViewController.m */; };
+		ADD57C49179D6138005E2DA3 /* ITMRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD57C48179D6137005E2DA3 /* ITMRoomCell.m */; };
+		ADD57C4B179D6152005E2DA3 /* ITMRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADD57C4A179D6151005E2DA3 /* ITMRoomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,9 @@
 		ADD57C3F179D4AF1005E2DA3 /* ITMAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMAuthManager.m; sourceTree = "<group>"; };
 		ADD57C44179D4BFA005E2DA3 /* ITMMainNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMMainNavigationViewController.h; sourceTree = "<group>"; };
 		ADD57C45179D4BFA005E2DA3 /* ITMMainNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMMainNavigationViewController.m; sourceTree = "<group>"; };
+		ADD57C47179D6137005E2DA3 /* ITMRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMRoomCell.h; sourceTree = "<group>"; };
+		ADD57C48179D6137005E2DA3 /* ITMRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMRoomCell.m; sourceTree = "<group>"; };
+		ADD57C4A179D6151005E2DA3 /* ITMRoomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITMRoomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,15 +256,18 @@
 		ADD57C42179D4B26005E2DA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AD2150A71796AA92003CDB1C /* ITMRoomsViewController.h */,
-				AD2150A81796AA92003CDB1C /* ITMRoomsViewController.m */,
-				AD2150AA1796AA92003CDB1C /* ITMRoomsViewController.xib */,
 				ADD57C39179D48EA005E2DA3 /* ITMLoginViewController.h */,
 				ADD57C3A179D48EA005E2DA3 /* ITMLoginViewController.m */,
 				ADD57C3B179D48EA005E2DA3 /* ITMLoginViewController.xib */,
+				AD2150A71796AA92003CDB1C /* ITMRoomsViewController.h */,
+				AD2150A81796AA92003CDB1C /* ITMRoomsViewController.m */,
+				AD2150AA1796AA92003CDB1C /* ITMRoomsViewController.xib */,
 				AD9969141796B7A400679215 /* ITMRoomViewController.h */,
 				AD9969151796B7A400679215 /* ITMRoomViewController.m */,
 				AD9969161796B7A400679215 /* ITMRoomViewController.xib */,
+				ADD57C47179D6137005E2DA3 /* ITMRoomCell.h */,
+				ADD57C48179D6137005E2DA3 /* ITMRoomCell.m */,
+				ADD57C4A179D6151005E2DA3 /* ITMRoomCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -356,6 +364,7 @@
 				AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */,
 				AD7792AB179ADE25006F6AE1 /* profile_picture_mask@2x.png in Resources */,
 				ADD57C3D179D48EA005E2DA3 /* ITMLoginViewController.xib in Resources */,
+				ADD57C4B179D6152005E2DA3 /* ITMRoomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +437,7 @@
 				ADD57C3C179D48EA005E2DA3 /* ITMLoginViewController.m in Sources */,
 				ADD57C40179D4AF1005E2DA3 /* ITMAuthManager.m in Sources */,
 				ADD57C46179D4BFA005E2DA3 /* ITMMainNavigationViewController.m in Sources */,
+				ADD57C49179D6138005E2DA3 /* ITMRoomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
