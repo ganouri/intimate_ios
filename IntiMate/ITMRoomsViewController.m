@@ -8,7 +8,6 @@
 
 #import "ITMRoomsViewController.h"
 #import "ITMRoomViewController.h"
-#import "UIActionSheet+MKBlockAdditions.h"
 #import "ITMRoomCell.h"
 
 #define ROOM_KEY @"ROOM_KEY"
@@ -31,6 +30,10 @@
                                                                                            target:self
                                                                                            action:@selector(addButtonClicked)];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                          target:self
+                                                                                          action:@selector(presentLockScreen)];
+    
     self.title = @"My Rooms";
     
     _dataSource = [NSMutableArray array];
@@ -41,17 +44,25 @@
     
 }
 
+// test
+- (void)presentLockScreen {
+    [[ITMAuthManager shared] presentLoginViewControllerPasswordOnly:YES
+                                                           animated:YES
+                                                         completion:^{}];
+}
+
 #pragma mark - User Events
 
 - (void)addButtonClicked {
-    [UIActionSheet photoPickerWithTitle:@"Attach File"
-                             showInView:self.view
-                              presentVC:self
-                          onPhotoPicked:^(UIImage *chosenImage) {
-                              
-                              // TODO: open address book
-
-                          } onCancel:^{}];
+    
+    [[ITMInteractionManager shared] presentCameraOnController:self
+                                                    withBlock:^(UIImage *chosenImage) {
+                                                        
+                                                        // TODO: open address book
+                                                        
+                                                    } cancelBlock:^{
+                                                        
+                                                    }];
 }
 
 #pragma mark - UITableView DataSource

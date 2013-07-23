@@ -18,6 +18,7 @@
     __weak IBOutlet UIButton *_unlockButton;
     __weak IBOutlet UILabel *_termsLabel;
     __weak IBOutlet UIButton *_termsButton;
+    __weak IBOutlet UIButton *_interactButton;
 }
 
 @property (nonatomic) BOOL isPasswordOnly;
@@ -25,6 +26,7 @@
 - (IBAction)loginClicked:(id)sender;
 - (IBAction)createClicked:(id)sender;
 - (IBAction)unlockClicked:(id)sender;
+- (IBAction)interactClicked:(id)sender;
 
 
 @end

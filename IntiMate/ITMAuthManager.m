@@ -44,6 +44,7 @@
                                     completion:(void (^)())completion {
     ITMLoginViewController *loginViewController = [ITMLoginViewController new];
     loginViewController.isPasswordOnly = passOnly;
+    loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.mainNavigationController presentViewController:loginViewController
                                                 animated:YES
                                               completion:^{

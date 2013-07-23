@@ -11,4 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "UIActionSheet+MKBlockAdditions.h"
+    #import "ITMAuthManager.h"
+    #import "ITMInteractionManager.h"
 #endif

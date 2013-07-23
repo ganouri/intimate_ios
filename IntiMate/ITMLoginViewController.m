@@ -25,6 +25,7 @@
         _unlockButton.hidden = NO;
         _termsButton.hidden = YES;
         _termsLabel.hidden = YES;
+        _interactButton.hidden = NO;
     } else {
         _emailTextField.hidden = NO;
         [_emailTextField becomeFirstResponder];
@@ -33,8 +34,8 @@
         _unlockButton.hidden = YES;
         _termsButton.hidden = NO;
         _termsLabel.hidden = NO;
+        _interactButton.hidden = YES;
     }
-
 }
 
 #pragma mark - User Events
@@ -49,6 +50,15 @@
 
 - (IBAction)unlockClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (IBAction)interactClicked:(id)sender {
+    [[ITMInteractionManager shared] presentCameraOnController:self
+                                                    withBlock:^(UIImage *chosenImage) {
+                                                        
+                                                    } cancelBlock:^{
+                                                        
+                                                    }];
 }
 
 @end

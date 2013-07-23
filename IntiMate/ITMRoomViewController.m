@@ -8,8 +8,6 @@
 
 #import "ITMRoomViewController.h"
 #import "UIBubbleTableView.h"
-#import "UIActionSheet+MKBlockAdditions.h"
-#import "ITMAuthManager.h"
 
 @interface ITMRoomViewController () <UIBubbleTableViewDataSource> {
     UIBubbleTableView *_bubbleView;
@@ -81,22 +79,17 @@
 #pragma mark - Add button clicked
 
 - (void)addButtonClicked {
-    [UIActionSheet photoPickerWithTitle:@"Attach File"
-                             showInView:self.view
-                              presentVC:self
-                          onPhotoPicked:^(UIImage *chosenImage) {
-                              
-                              [[ITMAuthManager shared] presentLoginViewControllerPasswordOnly:YES
-                                                                                     animated:YES
-                                                                                   completion:^{
-                                  [_dataSource addObject:chosenImage];
-                                  [_bubbleView reloadData];
-                              }];
-                              
-                          } onCancel:^{
-                              
-                          }];
+    
+    [[ITMInteractionManager shared] presentCameraOnController:self
+                                                    withBlock:^(UIImage *chosenImage) {
+        [[ITMAuthManager shared] presentLoginViewControllerPasswordOnly:YES
+                                                               animated:YES
+                                                             completion:^{
+                                                                 [_dataSource addObject:chosenImage];
+                                                                 [_bubbleView reloadData];
+                                                             }];
+                                                    } cancelBlock:^{
+                                                    }];
 }
-
 
 @end
