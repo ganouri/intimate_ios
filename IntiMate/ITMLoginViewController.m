@@ -8,6 +8,7 @@
 
 #import "ITMLoginViewController.h"
 
+
 @interface ITMLoginViewController ()
 
 @end
@@ -41,7 +42,17 @@
 #pragma mark - User Events
 
 - (IBAction)loginClicked:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    [[ITMAuthManager shared] loginWithLogin:@"kostia@me.com"
+                                  authToken:@"93e7c45926d723391f3a9629c09dec17"
+                                 completion:^(BOOL success, NSString *loginToken) {
+                                     if (success) {
+                                         NSLog(@"loginToken : %@", loginToken);
+                                         [self dismissViewControllerAnimated:YES completion:^{}];
+                                     } else {
+                                         [UIAlertView alertViewWithTitle:nil message:@"Could not authenticate"];
+                                     }
+                                 }];
 }
 
 - (IBAction)createClicked:(id)sender {

@@ -17,4 +17,8 @@
                                       animated:(BOOL)animated
                                     completion:(void (^)())completion;
 
+- (void)loginWithLogin:(NSString *)login
+             authToken:(NSString *)token
+            completion:(void (^)(BOOL success, NSString *authToken))completion;
+
 @end
