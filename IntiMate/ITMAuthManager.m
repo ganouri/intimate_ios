@@ -11,6 +11,10 @@
 #import "AFNetworking.h"
 
 #define AUTH_TOKEN @"AUTH_TOKEN"
+#define SECURE_TOKEN @"SECURE_TOKEN"
+#define USER_EMAIL @"USER_EMAIL"
+#define USER_NICKNAME @"USER_NICKNAME"
+#define Defaults [NSUserDefaults standardUserDefaults]
 
 @interface ITMAuthManager() {
     AFHTTPClient *_afHTTPClient;
@@ -37,7 +41,7 @@
                                                      name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
         
-        _afHTTPClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://54.213.95.44:8080"]];
+        _afHTTPClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:BASE_URL]];
     }
     return self;
 }
@@ -45,21 +49,54 @@
 #pragma mark - 
 
 - (void)setAuthToken:(NSString *)authToken {
-    [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [Defaults setObject:authToken forKey:AUTH_TOKEN];
+    [Defaults synchronize];
 }
 
 - (NSString *)authToken {
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN];
+    NSString *token = [Defaults objectForKey:AUTH_TOKEN];
     return token ? token : @"";
 }
 
-#pragma mark - 
+- (void)setSecureToken:(NSString *)secureToken {
+    [Defaults setObject:secureToken forKey:SECURE_TOKEN];
+    [Defaults synchronize];
+}
+
+- (NSString *)secureToken {
+    return [Defaults objectForKey:SECURE_TOKEN];
+}
+
+- (void)setEmail:(NSString *)email {
+    [Defaults setObject:email forKey:USER_EMAIL];
+    [Defaults synchronize];
+}
+
+- (NSString *)email {
+    return [Defaults objectForKey:USER_EMAIL];
+}
+
+- (void)setNickmane:(NSString *)nickmane {
+    [Defaults setObject:nickmane forKey:USER_NICKNAME];
+    [Defaults synchronize];
+}
+
+- (NSString *)nickmane {
+    return [Defaults objectForKey:USER_NICKNAME];
+}
+
+#pragma mark -
 
 - (void)applicationDidBecomeActiveNotification {
-    [self presentLoginViewControllerPasswordOnly:NO
-                                        animated:NO
-                                      completion:^{}];
+    if ([ITMAuthManager shared].secureToken == nil) {
+        [self presentLoginViewControllerPasswordOnly:NO
+                                            animated:NO
+                                          completion:^{}];
+    } else {
+        [self presentLoginViewControllerPasswordOnly:YES
+                                            animated:YES
+                                          completion:^{}];
+    }
 }
 
 - (void)presentLoginViewControllerPasswordOnly:(BOOL)passOnly
@@ -135,6 +172,7 @@
                                                         
                                                         if (responseDict && ![responseDict isKindOfClass:[NSNull class]]) {
                                                             NSLog(@"Success! responseDict: %@", responseDict);
+                                                            
                                                         } else {
                                                             NSLog(@"Fail in success, error: %@", JSON[@"errors"]);
                                                         }

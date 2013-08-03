@@ -24,6 +24,7 @@
 		AD2150B61796AA93003CDB1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2150911796AA92003CDB1C /* Foundation.framework */; };
 		AD2150BE1796AA93003CDB1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2150BC1796AA93003CDB1C /* InfoPlist.strings */; };
 		AD2150C11796AA93003CDB1C /* IntiMateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2150C01796AA93003CDB1C /* IntiMateTests.m */; };
+		AD625BA917ACEDCE00E5F316 /* ITMDataAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AD625BA817ACEDCE00E5F316 /* ITMDataAPI.m */; };
 		AD7792A6179A5E25006F6AE1 /* profile_picture_generic.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A4179A5E25006F6AE1 /* profile_picture_generic.png */; };
 		AD7792A7179A5E25006F6AE1 /* profile_picture_generic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */; };
 		AD7792AA179ADE25006F6AE1 /* profile_picture_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */; };
@@ -79,6 +80,8 @@
 		AD2150BD1796AA93003CDB1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2150BF1796AA93003CDB1C /* IntiMateTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntiMateTests.h; sourceTree = "<group>"; };
 		AD2150C01796AA93003CDB1C /* IntiMateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntiMateTests.m; sourceTree = "<group>"; };
+		AD625BA717ACEDCE00E5F316 /* ITMDataAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMDataAPI.h; sourceTree = "<group>"; };
+		AD625BA817ACEDCE00E5F316 /* ITMDataAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMDataAPI.m; sourceTree = "<group>"; };
 		AD7792A4179A5E25006F6AE1 /* profile_picture_generic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_picture_generic.png; sourceTree = "<group>"; };
 		AD7792A5179A5E25006F6AE1 /* profile_picture_generic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_picture_generic@2x.png"; sourceTree = "<group>"; };
 		AD7792A8179ADE25006F6AE1 /* profile_picture_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_picture_mask.png; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 		ADD57C43179D4B39005E2DA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD625BA717ACEDCE00E5F316 /* ITMDataAPI.h */,
+				AD625BA817ACEDCE00E5F316 /* ITMDataAPI.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				ADD57C46179D4BFA005E2DA3 /* ITMMainNavigationViewController.m in Sources */,
 				ADD57C49179D6138005E2DA3 /* ITMRoomCell.m in Sources */,
 				ADA4D8F7179EA6C900D59B87 /* ITMInteractionManager.m in Sources */,
+				AD625BA917ACEDCE00E5F316 /* ITMDataAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

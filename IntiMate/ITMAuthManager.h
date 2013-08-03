@@ -13,6 +13,9 @@
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 
 @property (nonatomic, retain) NSString *authToken;
+@property (nonatomic, retain) NSString *secureToken;
+@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString *nickmane;
 
 + (ITMAuthManager *)shared;
 

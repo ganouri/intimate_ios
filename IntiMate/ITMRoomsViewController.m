@@ -33,6 +33,20 @@
                                                                                           target:self
                                                                                           action:@selector(presentLockScreen)];
     self.title = @"My Rooms";
+    
+    NSString *secureToken = [[ITMAuthManager shared] secureToken];
+    if (secureToken && secureToken.length > 0) {
+        [ITMDataAPI getAllDataForToken:[[ITMAuthManager shared] secureToken]
+                            completion:^(BOOL success, NSDictionary *allDataDict) {
+                                if (success) {
+                                    NSLog(@"Roos: %@", allDataDict);
+                                } else {
+                                    [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
+                                }
+                            }];
+    } else {
+        
+    }
 }
 
 // test
@@ -46,14 +60,27 @@
 
 - (void)addButtonClicked {
     
-    [[ITMInteractionManager shared] presentCameraOnController:self
-                                                    withBlock:^(UIImage *chosenImage) {
-                                                        
-                                                        // TODO: open address book
-                                                        
-                                                    } cancelBlock:^{
-                                                        
-                                                    }];
+    if (TARGET_IPHONE_SIMULATOR) {
+        [UIActionSheet photoPickerWithTitle:nil
+                                 showInView:self.view
+                                  presentVC:self
+                              onPhotoPicked:^(UIImage *chosenImage) {
+                                  [ITMDataAPI sendImage:chosenImage
+                                             completion:^(BOOL success, NSDictionary *response) {
+                                                 
+                                             }];
+                              } onCancel:^{
+                              }];
+    } else {
+        [[ITMInteractionManager shared] presentCameraOnController:self
+                                                        withBlock:^(UIImage *chosenImage) {
+                                                            
+                                                            // TODO: open address book
+                                                            
+                                                        } cancelBlock:^{
+                                                            
+                                                        }];
+    }
 }
 
 #pragma mark - UITableView DataSource
