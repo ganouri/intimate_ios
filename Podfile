@@ -4,3 +4,5 @@ link_with ['IntiMate']
 
 pod 'AFNetworking', '~>1.3.1'
 pod 'UIBubbleTableView', '~>0.2'
+pod 'LBBlurredImage'
+pod 'MD5Digest'

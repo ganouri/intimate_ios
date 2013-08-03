@@ -10,6 +10,8 @@
 #import "ITMLoginViewController.h"
 #import "AFNetworking.h"
 
+#define AUTH_TOKEN @"AUTH_TOKEN"
+
 @interface ITMAuthManager() {
     AFHTTPClient *_afHTTPClient;
 }
@@ -35,9 +37,21 @@
                                                      name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
         
-        _afHTTPClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://localhost:8080"]];
+        _afHTTPClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://54.213.95.44:8080"]];
     }
     return self;
+}
+
+#pragma mark - 
+
+- (void)setAuthToken:(NSString *)authToken {
+    [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)authToken {
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN];
+    return token ? token : @"";
 }
 
 #pragma mark - 
@@ -52,7 +66,8 @@
                                       animated:(BOOL)animated
                                     completion:(void (^)())completion {
     ITMLoginViewController *loginViewController = [ITMLoginViewController new];
-    loginViewController.isPasswordOnly = passOnly;
+    ITMLoginViewType type = passOnly ? ITMLoginViewTypeLockscreen : ITMLoginViewTypeLogin;
+    loginViewController.type = type;
     loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.mainNavigationController presentViewController:loginViewController
                                                 animated:YES
@@ -71,22 +86,19 @@
     NSURLRequest *request = [_afHTTPClient requestWithMethod:@"POST"
                                                         path:@"login"
                                                   parameters:params];
-//    NSMutableURLRequest *request1 = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080"]];
-//    [request1 setHTTPMethod:@"POST"];
-    
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                         
                                                         NSString *token = JSON[@"payload"];
                                                         
-                                                        if (token) {
+                                                        if (![token isKindOfClass:[NSNull class]]) {
                                                             NSLog(@"Success! Token: %@", token);
                                                         } else {
                                                             NSLog(@"Fail, error: %@", JSON[@"errors"]);
                                                         }
                                                         
-                                                        completion(token!=nil,token);
+                                                        completion(token!=nil && ![token isKindOfClass:[NSNull class]], token);
                                                         
                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         NSLog(@"Failed: %@", JSON);
@@ -100,17 +112,41 @@
                                                         completion(token!=nil,token);
                                                         
                                                     }];
-    /*
-    [_afHTTPClient  HTTPRequestOperationWithRequest:request
-                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
-                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    NSLog(@"Failed: %@", error);
-                                }];
-    */
-    //[_afHTTPClient enqueueHTTPRequestOperation:operation];
     [operation start];
     
+}
+
+- (void)signupWithNickname:(NSString *)nickmane
+                     email:(NSString *)email
+                  password:(NSString *)password
+                completion:(void (^)(BOOL success, NSDictionary *responseData))completion {
+    NSDictionary *params = @{@"nickname": nickmane,
+                             @"email": email,
+                             @"password": password};
+    
+    NSURLRequest *request = [_afHTTPClient requestWithMethod:@"POST"
+                                                        path:@"signup"
+                                                  parameters:params];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSDictionary *responseDict = JSON[@"payload"];
+                                                        
+                                                        if (responseDict && ![responseDict isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! responseDict: %@", responseDict);
+                                                        } else {
+                                                            NSLog(@"Fail in success, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]], responseDict);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, nil);
+                                                    }];
+    [operation start];
+
 }
 
 

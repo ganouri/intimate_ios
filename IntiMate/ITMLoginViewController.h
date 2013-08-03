@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    ITMLoginViewTypeCreate = 99,
+    ITMLoginViewTypeLogin,
+    ITMLoginViewTypeLockscreen,
+} ITMLoginViewType;
+
 @interface ITMLoginViewController : UIViewController {
     
+    __weak IBOutlet UITextField *_nicknameTextFiled;
     __weak IBOutlet UITextField *_emailTextField;
     __weak IBOutlet UITextField *_passwordTextField;
     __weak IBOutlet UIButton *_loginButton;
@@ -21,7 +28,7 @@
     __weak IBOutlet UIButton *_interactButton;
 }
 
-@property (nonatomic) BOOL isPasswordOnly;
+@property (nonatomic) ITMLoginViewType type;
 
 - (IBAction)loginClicked:(id)sender;
 - (IBAction)createClicked:(id)sender;

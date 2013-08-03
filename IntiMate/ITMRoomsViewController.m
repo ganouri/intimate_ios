@@ -13,7 +13,6 @@
 #define ROOM_KEY @"ROOM_KEY"
 
 @interface ITMRoomsViewController () <UITableViewDataSource, UITableViewDelegate> {
-    NSMutableArray *_dataSource;
 }
 
 @end
@@ -33,15 +32,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                           target:self
                                                                                           action:@selector(presentLockScreen)];
-    
     self.title = @"My Rooms";
-    
-    _dataSource = [NSMutableArray array];
-    
-    for (int i = 0; i < 8; i ++) {
-        [_dataSource addObject:[NSString stringWithFormat:@"Room %d", i]];
-    }
-    
 }
 
 // test
@@ -68,15 +59,15 @@
 #pragma mark - UITableView DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataSource.count;
+    return [[[ITMInteractionManager shared] rooms] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *ident = @"ITMRoomCell";
     ITMRoomCell *cell = [tableView dequeueReusableCellWithIdentifier:ident];
 
-    cell.titleLabel.text = _dataSource[indexPath.row];
-    cell.subtitleLabel.text = @"Me, Kate Ruby";
+//    cell.titleLabel.text = _dataSource[indexPath.row];
+//    cell.subtitleLabel.text = @"Me, Kate Ruby";
     
     return cell;
 }
@@ -87,7 +78,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ITMRoomViewController *roomVC = [ITMRoomViewController new];
-    roomVC.title = _dataSource[indexPath.row];
+    // [[ITMInteractionManager shared] rooms]
+//    roomVC.title = _dataSource[indexPath.row];
     [self.navigationController pushViewController:roomVC animated:YES];
 }
 

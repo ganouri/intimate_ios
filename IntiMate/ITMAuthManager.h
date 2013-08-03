@@ -12,7 +12,10 @@
 
 @property (nonatomic, strong) UINavigationController *mainNavigationController;
 
+@property (nonatomic, retain) NSString *authToken;
+
 + (ITMAuthManager *)shared;
+
 - (void)presentLoginViewControllerPasswordOnly:(BOOL)passOnly
                                       animated:(BOOL)animated
                                     completion:(void (^)())completion;
@@ -20,5 +23,10 @@
 - (void)loginWithLogin:(NSString *)login
              authToken:(NSString *)token
             completion:(void (^)(BOOL success, NSString *authToken))completion;
+
+- (void)signupWithNickname:(NSString *)nickmane
+                     email:(NSString *)email
+                  password:(NSString *)password
+                completion:(void (^)(BOOL success, NSDictionary *responseData))completion;
 
 @end

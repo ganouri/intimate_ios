@@ -8,6 +8,8 @@
 
 #import "ITMRoomViewController.h"
 #import "UIBubbleTableView.h"
+#import "UIImageView+LBBlurredImage.h"
+
 
 @interface ITMRoomViewController () <UIBubbleTableViewDataSource> {
     UIBubbleTableView *_bubbleView;
