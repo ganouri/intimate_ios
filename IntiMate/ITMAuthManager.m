@@ -9,6 +9,7 @@
 #import "ITMAuthManager.h"
 #import "ITMLoginViewController.h"
 #import "AFNetworking.h"
+#import "NSString+MD5.h"
 
 #define AUTH_TOKEN @"AUTH_TOKEN"
 #define SECURE_TOKEN @"SECURE_TOKEN"
@@ -47,6 +48,10 @@
 }
 
 #pragma mark - 
+
++ (NSString *)authTokenForEmail:(NSString *)email password:(NSString *)password {
+    return [[NSString stringWithFormat:@":%@:%@:", email, [password MD5Digest]] MD5Digest];
+}
 
 - (void)setAuthToken:(NSString *)authToken {
     [Defaults setObject:authToken forKey:AUTH_TOKEN];

@@ -18,7 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    switch (self.type) {
+    [self setUIType:self.type];
+}
+
+#pragma mark - UI
+
+- (void)setUIType:(ITMLoginViewType)type {
+    switch (type) {
         case ITMLoginViewTypeCreate:
             _emailTextField.hidden = NO;
             [_emailTextField becomeFirstResponder];
@@ -28,9 +34,8 @@
             _termsButton.hidden = NO;
             _termsLabel.hidden = NO;
             _interactButton.hidden = YES;
-            _loginButton.hidden = YES;
-            _createAccountButton.hidden = NO;
             _nicknameTextFiled.hidden = NO;
+            _logoutButton.hidden = YES;
             break;
         case ITMLoginViewTypeLogin:
             _emailTextField.hidden = NO;
@@ -41,9 +46,8 @@
             _termsButton.hidden = NO;
             _termsLabel.hidden = NO;
             _interactButton.hidden = YES;
-            _loginButton.hidden = NO;
-            _createAccountButton.hidden = NO;
             _nicknameTextFiled.hidden = NO;
+            _logoutButton.hidden = YES;
             break;
         case ITMLoginViewTypeLockscreen:
             _emailTextField.hidden = YES;
@@ -55,9 +59,9 @@
             _termsLabel.hidden = YES;
             _interactButton.hidden = NO;
             _nicknameTextFiled.hidden = YES;
+            _logoutButton.hidden = NO;
             break;
     }
-    
 }
 
 #pragma mark - User Events
@@ -65,7 +69,7 @@
 - (IBAction)loginClicked:(id)sender {
     
     [[ITMAuthManager shared] loginWithLogin:_emailTextField.text
-                                  authToken:[ITMAuthManager shared].authToken
+                                  authToken:[ITMAuthManager authTokenForEmail:_emailTextField.text password:_passwordTextField.text]
                                  completion:^(BOOL success, NSString *loginToken) {
                                      if (success) {
                                          NSLog(@"loginToken : %@", loginToken);
@@ -129,6 +133,18 @@
                                                     } cancelBlock:^{
                                                         
                                                     }];
+}
+
+- (IBAction)logoutButtonClicked:(id)sender {
+    [UIAlertView alertViewWithTitle:nil
+                            message:@"Do you want to Log out?"
+                  cancelButtonTitle:@"No"
+                  otherButtonTitles:@[@"Yes"]
+                          onDismiss:^(int buttonIndex) {
+                              [[ITMAuthManager shared] setSecureToken:nil];
+                              [[ITMAuthManager shared] setAuthToken:nil];
+                              [self setUIType:ITMLoginViewTypeCreate];
+                          } onCancel:^{}];
 }
 
 @end

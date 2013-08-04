@@ -32,4 +32,6 @@
                   password:(NSString *)password
                 completion:(void (^)(BOOL success, NSDictionary *responseData))completion;
 
++ (NSString *)authTokenForEmail:(NSString *)email password:(NSString *)password;
+
 @end

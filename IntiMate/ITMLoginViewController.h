@@ -26,6 +26,7 @@ typedef enum {
     __weak IBOutlet UILabel *_termsLabel;
     __weak IBOutlet UIButton *_termsButton;
     __weak IBOutlet UIButton *_interactButton;
+    __weak IBOutlet UIButton *_logoutButton;
 }
 
 @property (nonatomic) ITMLoginViewType type;
@@ -34,6 +35,7 @@ typedef enum {
 - (IBAction)createClicked:(id)sender;
 - (IBAction)unlockClicked:(id)sender;
 - (IBAction)interactClicked:(id)sender;
+- (IBAction)logoutButtonClicked:(id)sender;
 
 
 @end
