@@ -14,7 +14,15 @@
                 completion:(void (^)(BOOL success, NSDictionary *rooms))completion;
 
 + (void)sendImage:(UIImage *)image
-       completion:(void (^)(BOOL success, NSDictionary *response))completion;
+       completion:(void (^)(BOOL success, NSString *resourceId))completion;
 
+
++ (void)associateResource:(NSString *)resourceId
+                 withRoom:(NSString *)roomId
+               completion:(void (^)(BOOL success, NSString *assiciationTimestamp))completion;
+
+
++ (void)createRoomWithUsers:(NSString *)colonSeparatedUsers
+                 completion:(void (^)(BOOL success, NSString *roomId))completion;
 
 @end

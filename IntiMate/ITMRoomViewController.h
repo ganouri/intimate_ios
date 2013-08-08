@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ITMRoomViewController : UIViewController
+@interface ITMRoomViewController : UIViewController {
+    
+}
+
+- (void)addImageToDataSource:(UIImage *)image;
 
 @end

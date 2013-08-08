@@ -38,7 +38,7 @@
 }
 
 + (void)sendImage:(UIImage *)image
-       completion:(void (^)(BOOL success, NSDictionary *response))completion {
+       completion:(void (^)(BOOL success, NSString *resourceId))completion {
 
     AFHTTPClient *client= [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:BASE_URL]];
     
@@ -61,13 +61,72 @@
                                                         
                                                          NSString *resourceID = JSON[@"payload"];
                                                         NSLog(@"%@", JSON);
-//                                                        if   (![token isKindOfClass:[NSNull class]]) {
-//                                                            NSLog(@"Success! Token: %@", token);
-//                                                        } else {
-//                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
-//                                                        }
+                                                        if   (![resourceID isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! resourceID: %@", resourceID);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
                                                         
-//                                                        completion(token!=nil && ![token isKindOfClass:[NSNull class]], token);
+                                                        completion(resourceID != nil && ![resourceID isKindOfClass:[NSNull class]], resourceID);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, nil);
+                                                    }];
+    [operation start];
+}
+
++ (void)associateResource:(NSString *)resourceId
+                 withRoom:(NSString *)roomId
+               completion:(void (^)(BOOL success, NSString *associationTimestamp))completion {
+    NSString *urlString = [NSString stringWithFormat:@"%@/secure/%@/room/%@/asc/%@",
+                           BASE_URL,
+                           [[ITMAuthManager shared] secureToken],
+                           roomId,
+                           resourceId];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSString *associationTimestamp = JSON[@"payload"];
+                                                        
+                                                        if (![associationTimestamp isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! allData: %@", associationTimestamp);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(associationTimestamp!=nil && ![associationTimestamp isKindOfClass:[NSNull class]], associationTimestamp);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, JSON);
+                                                    }];
+    [operation start];
+}
+
+
++ (void)createRoomWithUsers:(NSString *)colonSeparatedUsers
+                 completion:(void (^)(BOOL success, NSString *roomId))completion {
+    NSString *urlString = [NSString stringWithFormat:@"%@/secure/%@/roomid/%@",
+                           BASE_URL, [[ITMAuthManager shared] secureToken], colonSeparatedUsers];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSString *roomId = JSON[@"payload"];
+                                                        
+                                                        if (![roomId isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! allData: %@", roomId);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(roomId!=nil && ![roomId isKindOfClass:[NSNull class]], roomId);
                                                         
                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         NSLog(@"Failed: %@", JSON);

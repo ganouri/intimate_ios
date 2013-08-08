@@ -40,6 +40,8 @@
                             completion:^(BOOL success, NSDictionary *allDataDict) {
                                 if (success) {
                                     NSLog(@"Roos: %@", allDataDict);
+                                    [[ITMInteractionManager shared] setRooms:allDataDict[@"rooms"]];
+                                    [_tableView reloadData];
                                 } else {
                                     [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
                                 }
@@ -60,16 +62,41 @@
 
 - (void)addButtonClicked {
     
+    NSString *testUsers = @"mark@gmail.com:k@m.com";
+    
     if (TARGET_IPHONE_SIMULATOR) {
         [UIActionSheet photoPickerWithTitle:nil
                                  showInView:self.view
                                   presentVC:self
                               onPhotoPicked:^(UIImage *chosenImage) {
                                   [ITMDataAPI sendImage:chosenImage
-                                             completion:^(BOOL success, NSDictionary *response) {
+                                             completion:^(BOOL success, NSString *resourceId) {
                                                  
+                                                 [ITMDataAPI createRoomWithUsers:testUsers
+                                                                      completion:^(BOOL success, NSString *roomId) {
+                                                                          
+                                                                          NSLog(@"ROOM ID FROM SERVER: %@", roomId);
+                                                                          
+                                                                          [ITMDataAPI associateResource:resourceId
+                                                                                              withRoom:roomId
+                                                                                             completion:^(BOOL success, NSString *associationTimestamp) {
+                                                                                              
+                                                                                                 if (success) {
+                                                                                                     // TODO: resource & room are linked
+                                                                                                     // open the room with the resource presented
+                                                                                                     
+                                                                                                     ITMRoomViewController *roomVC = [ITMRoomViewController new];
+                                                                                                     // [[ITMInteractionManager shared] rooms]
+                                                                                                     roomVC.title = resourceId;
+                                                                                                     [roomVC addImageToDataSource:chosenImage];
+                                                                                                     [self.navigationController pushViewController:roomVC animated:YES];
+                                                                                                 }
+                                                                                                 
+                                                                                             }];
+                                                                      }];                                                 
                                              }];
                               } onCancel:^{
+                                  // user canceled sending picture
                               }];
     } else {
         [[ITMInteractionManager shared] presentCameraOnController:self
@@ -93,7 +120,7 @@
     static NSString *ident = @"ITMRoomCell";
     ITMRoomCell *cell = [tableView dequeueReusableCellWithIdentifier:ident];
 
-//    cell.titleLabel.text = _dataSource[indexPath.row];
+    cell.titleLabel.text = @"room";//_dataSource[indexPath.row];
 //    cell.subtitleLabel.text = @"Me, Kate Ruby";
     
     return cell;

@@ -18,5 +18,12 @@
     #import "ITMDataAPI.h"
 
 
-#define BASE_URL/* @"http://54.213.95.44:8080"//*/ @"http://localhost:8080"
+#define LOCALHOST @"http://localhost:8080"
+#define PRODUCTION @"http://54.213.95.44:8080"
+
+#define USE_PRODUCTION 1
+
+#define BASE_URL USE_PRODUCTION ? PRODUCTION : LOCALHOST
+
+
 #endif

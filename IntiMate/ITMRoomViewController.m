@@ -26,7 +26,7 @@
     if (self) {
         // Custom initialization
         
-        _dataSource = [@[@"Hello", @"Test", @"Hi", @"Good day", @"Love"] mutableCopy];
+        _dataSource = [NSMutableArray array];
         
     }
     return self;
@@ -92,6 +92,13 @@
                                                              }];
                                                     } cancelBlock:^{
                                                     }];
+}
+
+#pragma mark - Public
+
+- (void)addImageToDataSource:(UIImage *)image {
+    [_dataSource addObject:image];
+    [_bubbleView reloadData];
 }
 
 @end

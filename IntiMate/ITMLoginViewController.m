@@ -73,7 +73,17 @@
                                  completion:^(BOOL success, NSString *loginToken) {
                                      if (success) {
                                          NSLog(@"loginToken : %@", loginToken);
+                                         
+                                         NSString *tokenMD5 = [[NSString stringWithFormat:@":%@:%@:",
+                                                                _emailTextField.text,
+                                                                [_passwordTextField.text MD5Digest]]
+                                                               MD5Digest];
+                                         
+                                         [[ITMAuthManager shared] setAuthToken:tokenMD5];
                                          [[ITMAuthManager shared] setSecureToken:loginToken];
+                                         [[ITMAuthManager shared] setEmail:_emailTextField.text];
+                                         [[ITMAuthManager shared] setNickmane:_nicknameTextFiled.text];
+                                         
                                          [self dismissViewControllerAnimated:YES completion:^{}];
                                      } else {
                                          [UIAlertView alertViewWithTitle:nil message:@"Could not authenticate"];
@@ -89,24 +99,14 @@
                                      completion:^(BOOL success, NSDictionary *responseData) {
                                          if (success) {
                                              NSLog(@"%@", responseData);
-                                             NSString *pass = responseData[@"password"];
-                                             
-                                             NSString *tokenMD5 = [[NSString stringWithFormat:@":%@:%@:", _emailTextField.text, pass] MD5Digest];
-                                             [[ITMAuthManager shared] setAuthToken:tokenMD5];
-                                             [[ITMAuthManager shared] setEmail:_emailTextField.text];
-                                             [[ITMAuthManager shared] setNickmane:_nicknameTextFiled.text];
-                                             
-                                             
+//                                             NSString *pass = responseData[@"password"];
+
                                              // login automatically
                                              [self loginClicked:nil];
-//                                             [[ITMAuthManager shared] loginWithLogin:_emailTextField.text
-//                                                                           authToken:tokenMD5 completion:^(BOOL success, NSString *authToken) {
-//                                                                           }];
-                                             
+
                                              // TODO:
 //                                             NSArray *rooms = responseData[@"rooms"];
                                              
-//                                             [self dismissViewControllerAnimated:YES completion:^{}];
                                          } else {
                                              [UIAlertView alertViewWithTitle:nil message:@"Could not create user"];
                                          }
