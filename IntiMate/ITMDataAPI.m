@@ -37,29 +37,114 @@
     [operation start];
 }
 
-+ (void)getRoomsForToken:(NSString *)token
-              completion:(void (^)(BOOL success, NSArray *rooms))completion {
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/secure/%@/rooms", BASE_URL, token]]];
-    
-    
-    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"POST"
-                                                                               path:[NSString stringWithFormat:@"%@/secure/%@/rooms", BASE_URL, token]
-                                                                         parameters:nil];
 
++ (void)getListOf:(NSString *)entity
+         forToken:(NSString *)token
+       completion:(void (^)(BOOL success, id rooms))completion {
+    
+    NSString *path = [NSString stringWithFormat:@"%@/secure/%@/%@", BASE_URL, token, entity];
+    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"POST"
+                                                                               path:path
+                                                                         parameters:nil];
     
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                         
-                                                        NSArray *rooms = JSON[@"payload"];
+                                                        NSArray *list = JSON[@"payload"];
                                                         
-                                                        if (![rooms isKindOfClass:[NSNull class]]) {
-                                                            NSLog(@"Success! rooms: %@", rooms);
+                                                        if (![list isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! list: %@", list);
                                                         } else {
                                                             NSLog(@"Fail, error: %@", JSON[@"errors"]);
                                                         }
                                                         
-                                                        completion(rooms!=nil && ![rooms isKindOfClass:[NSNull class]], rooms);
+                                                        completion(list!=nil && ![list isKindOfClass:[NSNull class]], list);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, JSON);
+                                                    }];
+    [operation start];
+}
+
++ (void)getRoomData:(NSString *)roomId
+         completion:(void (^)(BOOL success, id list))completion {
+    NSString *path = [NSString stringWithFormat:@"%@/secure/%@/room/%@", BASE_URL, [ITMAuthManager shared].secureToken, roomId];
+    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"GET"
+                                                                               path:path
+                                                                         parameters:nil];
+    
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSArray *list = JSON[@"payload"][@"corr"];
+                                                        
+                                                        if (![list isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! list: %@", list);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(list!=nil && ![list isKindOfClass:[NSNull class]], list);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, JSON);
+                                                    }];
+    [operation start];
+}
+
++ (void)getAllResourcesWithCompletion:(void (^)(BOOL success, id list))completion {
+    NSString *path = [NSString stringWithFormat:@"%@/secure/%@/resources", BASE_URL, [ITMAuthManager shared].secureToken];
+    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"POST"
+                                                                               path:path
+                                                                         parameters:nil];
+    
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSArray *list = JSON[@"payload"];
+                                                        
+                                                        if (![list isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! list: %@", list);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(list!=nil && ![list isKindOfClass:[NSNull class]], list);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, JSON);
+                                                    }];
+    [operation start];
+}
+
++ (void)getResource:(NSString *)resourceId
+            forRoom:(NSString *)roomId
+         completion:(void (^)(BOOL success, id list))completion {
+    // /secure/:hash/room/:room/resource/:resource
+    NSString *path = [NSString stringWithFormat:@"%@/secure/%@/room/%@/resource/%@", BASE_URL, [ITMAuthManager shared].secureToken, roomId, resourceId];
+    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"POST"
+                                                                               path:path
+                                                                         parameters:nil];
+    
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSArray *list = JSON[@"payload"][@"corr"];
+                                                        
+                                                        if (![list isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! list: %@", list);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(list!=nil && ![list isKindOfClass:[NSNull class]], list);
                                                         
                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         NSLog(@"Failed: %@", JSON);
@@ -164,6 +249,24 @@
                                                         completion(NO, JSON);
                                                     }];
     [operation start];
+}
+
+#pragma mark - Singleton
+
+- (id)init {
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
++ (ITMDataAPI *)shared {
+    static ITMDataAPI *instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [ITMDataAPI new];
+    });
+    return instance;
 }
 
 @end

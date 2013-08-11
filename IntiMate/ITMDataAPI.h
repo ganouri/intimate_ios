@@ -10,11 +10,26 @@
 
 @interface ITMDataAPI : NSObject
 
+@property (nonatomic, retain) NSDictionary *users;
+@property (nonatomic, retain) NSArray *resources;
+
++ (ITMDataAPI *)shared;
+
 + (void)getAllDataForToken:(NSString *)token
                 completion:(void (^)(BOOL success, NSDictionary *rooms))completion;
 
-+ (void)getRoomsForToken:(NSString *)token
-              completion:(void (^)(BOOL success, NSArray *rooms))completion;
++ (void)getListOf:(NSString *)entity
+         forToken:(NSString *)token
+       completion:(void (^)(BOOL success, id list))completion;
+
++ (void)getRoomData:(NSString *)roomId
+         completion:(void (^)(BOOL success, id list))completion;
+
++ (void)getAllResourcesWithCompletion:(void (^)(BOOL success, id list))completion;
+
++ (void)getResource:(NSString *)resourceId
+            forRoom:(NSString *)roomId
+         completion:(void (^)(BOOL success, id list))completion;
 
 + (void)sendImage:(UIImage *)image
        completion:(void (^)(BOOL success, NSString *resourceId))completion;

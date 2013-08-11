@@ -37,32 +37,45 @@
     NSString *secureToken = [[ITMAuthManager shared] secureToken];
     if (secureToken && secureToken.length > 0) {
         
-        [ITMDataAPI getRoomsForToken:[[ITMAuthManager shared] secureToken]
-                          completion:^(BOOL success, NSArray *rooms) {
-                              if (success) {
-                                  NSLog(@"Roos: %@", rooms);
-                                  
-                                  [[ITMInteractionManager shared] setRooms:rooms];
-                                  [_tableView reloadData];
-                              } else {
-                                  [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
-                              }
-                          }];
+        [ITMDataAPI getListOf:@"rooms"
+                     forToken:[[ITMAuthManager shared] secureToken]
+                   completion:^(BOOL success, NSArray *rooms) {
+                       if (success) {
+                           [[ITMInteractionManager shared] setRooms:rooms];
+                           [_tableView reloadData];
+                       } else {
+                           [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
+                       }
+                   }];
         
         
-        /*
+        [ITMDataAPI getListOf:@"contacts"
+                     forToken:secureToken
+                   completion:^(BOOL success, NSDictionary *contacts) {
+                       
+                       [[ITMDataAPI shared] setUsers:contacts];
+                       
+                   }];
+        
+        
         [ITMDataAPI getAllDataForToken:[[ITMAuthManager shared] secureToken]
                             completion:^(BOOL success, NSDictionary *allDataDict) {
                                 if (success) {
-                                    NSLog(@"Roos: %@", allDataDict);
+                                    NSLog(@"ALL DATA: %@", allDataDict);
                                     
-                                    [[ITMInteractionManager shared] setRooms:[allDataDict[@"rooms"] allValues]];
-                                    [_tableView reloadData];
+                                    [[ITMAuthManager shared] setCurrentUser:allDataDict];
+                                    
+//                                    [[ITMInteractionManager shared] setRooms:[allDataDict[@"rooms"] allValues]];
+//                                    [_tableView reloadData];
                                 } else {
                                     [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
                                 }
                             }];
-         */
+        
+        [ITMDataAPI getAllResourcesWithCompletion:^(BOOL success, id list) {
+            [[ITMDataAPI shared] setResources:list];
+        }];
+         
     } else {
         
     }
@@ -139,8 +152,26 @@
 
     NSDictionary *room = [[ITMInteractionManager shared] rooms][indexPath.row];
     
+    NSArray *members = room[@"members"];
+    NSMutableString *users = [NSMutableString string];
+    for (NSString *memberId in members) {
+        
+        NSString *nickname = [[ITMDataAPI shared].users objectForKey:memberId][@"nickname"];
+        if (nickname) {
+            [users appendString:nickname];
+            if (![memberId isEqualToString:members.lastObject]) {
+                [users appendString:@", "];
+            }
+        } else {
+            break;
+        }
+    }
     
-    cell.titleLabel.text = room[@"_id"];
+    if ([users isEqualToString:@""]) {
+        [users appendString:@"unable to get nicknames..."];
+    }
+    
+    cell.titleLabel.text = users;
     
     NSDateFormatter *df = [NSDateFormatter new];
     df.dateStyle = NSDateFormatterMediumStyle;
@@ -159,7 +190,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSDictionary *room = [[ITMInteractionManager shared] rooms][indexPath.row];
     ITMRoomViewController *roomVC = [ITMRoomViewController new];
+    roomVC.roomId = room[@"_id"];
     // [[ITMInteractionManager shared] rooms]
 //    roomVC.title = _dataSource[indexPath.row];
     [self.navigationController pushViewController:roomVC animated:YES];

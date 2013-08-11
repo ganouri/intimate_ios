@@ -12,6 +12,9 @@
     
 }
 
+@property (nonatomic, retain) NSString *roomId;
+
 - (void)addImageToDataSource:(UIImage *)image;
+
 
 @end

@@ -16,6 +16,7 @@ typedef void (^ITMPhotoPickedBlock)(UIImage *chosenImage);
 @property (nonatomic, copy) ITMPhotoPickedBlock photoPickedBlock;
 @property (nonatomic, copy) ITMCancelBlock cancelBlock;
 @property (nonatomic, retain) NSArray *rooms;
+@property (nonatomic, retain) NSArray *contacts;
 
 + (ITMInteractionManager *)shared;
 

@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *nickmane;
 @property (nonatomic, retain) AFHTTPClient *afHTTPClient;
+@property (nonatomic, retain) NSDictionary *currentUser;
 
 + (ITMAuthManager *)shared;
 
