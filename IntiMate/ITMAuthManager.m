@@ -8,7 +8,6 @@
 
 #import "ITMAuthManager.h"
 #import "ITMLoginViewController.h"
-#import "AFNetworking.h"
 #import "NSString+MD5.h"
 
 #define AUTH_TOKEN @"AUTH_TOKEN"
@@ -24,6 +23,7 @@
 @end
 
 @implementation ITMAuthManager
+@synthesize afHTTPClient = _afHTTPClient;
 
 + (ITMAuthManager *)shared {
     static dispatch_once_t onceToken;
@@ -123,7 +123,7 @@
             completion:(void (^)(BOOL success, NSString *loginToken))completion {
     
     NSDictionary *params = @{@"user": login,
-                             @"auth_hash": token};
+                             @"authHash": token};
     
     NSURLRequest *request = [_afHTTPClient requestWithMethod:@"POST"
                                                         path:@"login"

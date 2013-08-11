@@ -13,6 +13,9 @@
 + (void)getAllDataForToken:(NSString *)token
                 completion:(void (^)(BOOL success, NSDictionary *rooms))completion;
 
++ (void)getRoomsForToken:(NSString *)token
+              completion:(void (^)(BOOL success, NSArray *rooms))completion;
+
 + (void)sendImage:(UIImage *)image
        completion:(void (^)(BOOL success, NSString *resourceId))completion;
 

@@ -37,6 +37,37 @@
     [operation start];
 }
 
++ (void)getRoomsForToken:(NSString *)token
+              completion:(void (^)(BOOL success, NSArray *rooms))completion {
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/secure/%@/rooms", BASE_URL, token]]];
+    
+    
+    NSURLRequest *request = [[ITMAuthManager shared].afHTTPClient requestWithMethod:@"POST"
+                                                                               path:[NSString stringWithFormat:@"%@/secure/%@/rooms", BASE_URL, token]
+                                                                         parameters:nil];
+
+    
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        
+                                                        NSArray *rooms = JSON[@"payload"];
+                                                        
+                                                        if (![rooms isKindOfClass:[NSNull class]]) {
+                                                            NSLog(@"Success! rooms: %@", rooms);
+                                                        } else {
+                                                            NSLog(@"Fail, error: %@", JSON[@"errors"]);
+                                                        }
+                                                        
+                                                        completion(rooms!=nil && ![rooms isKindOfClass:[NSNull class]], rooms);
+                                                        
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Failed: %@", JSON);
+                                                        completion(NO, JSON);
+                                                    }];
+    [operation start];
+}
+
 + (void)sendImage:(UIImage *)image
        completion:(void (^)(BOOL success, NSString *resourceId))completion {
 

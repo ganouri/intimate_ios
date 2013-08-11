@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
 
 @interface ITMAuthManager : NSObject
 
@@ -16,6 +17,7 @@
 @property (nonatomic, retain) NSString *secureToken;
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *nickmane;
+@property (nonatomic, retain) AFHTTPClient *afHTTPClient;
 
 + (ITMAuthManager *)shared;
 

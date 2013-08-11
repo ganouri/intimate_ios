@@ -36,16 +36,33 @@
     
     NSString *secureToken = [[ITMAuthManager shared] secureToken];
     if (secureToken && secureToken.length > 0) {
+        
+        [ITMDataAPI getRoomsForToken:[[ITMAuthManager shared] secureToken]
+                          completion:^(BOOL success, NSArray *rooms) {
+                              if (success) {
+                                  NSLog(@"Roos: %@", rooms);
+                                  
+                                  [[ITMInteractionManager shared] setRooms:rooms];
+                                  [_tableView reloadData];
+                              } else {
+                                  [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
+                              }
+                          }];
+        
+        
+        /*
         [ITMDataAPI getAllDataForToken:[[ITMAuthManager shared] secureToken]
                             completion:^(BOOL success, NSDictionary *allDataDict) {
                                 if (success) {
                                     NSLog(@"Roos: %@", allDataDict);
-                                    [[ITMInteractionManager shared] setRooms:allDataDict[@"rooms"]];
+                                    
+                                    [[ITMInteractionManager shared] setRooms:[allDataDict[@"rooms"] allValues]];
                                     [_tableView reloadData];
                                 } else {
                                     [UIAlertView alertViewWithTitle:nil message:@"Could not get rooms"];
                                 }
                             }];
+         */
     } else {
         
     }
@@ -120,8 +137,19 @@
     static NSString *ident = @"ITMRoomCell";
     ITMRoomCell *cell = [tableView dequeueReusableCellWithIdentifier:ident];
 
-    cell.titleLabel.text = @"room";//_dataSource[indexPath.row];
-//    cell.subtitleLabel.text = @"Me, Kate Ruby";
+    NSDictionary *room = [[ITMInteractionManager shared] rooms][indexPath.row];
+    
+    
+    cell.titleLabel.text = room[@"_id"];
+    
+    NSDateFormatter *df = [NSDateFormatter new];
+    df.dateStyle = NSDateFormatterMediumStyle;
+    df.doesRelativeDateFormatting = YES;
+    NSTimeInterval ti = [room[@"lastUpdated"] doubleValue]/1000;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:ti];
+    NSString *dateString = [df stringFromDate:date];
+    
+    cell.subtitleLabel.text = dateString;
     
     return cell;
 }
